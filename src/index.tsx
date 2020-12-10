@@ -9,11 +9,11 @@ import 'antd/dist/antd.css'
  * @param {Object} crop - crop Object
  * @param {String} fileName - Name of the returned file in Promise
  */
-function getCroppedImg(image: HTMLCanvasElement | HTMLImageElement | SVGImageElement | HTMLVideoElement | ImageBitmap | OffscreenCanvas | null, crop: { width: number; height: number; x: number; y: number } | null, fileName: any) {
+function getCroppedImg(image: any, crop: any, fileName: string) {
   const pixelRatio = window.devicePixelRatio || 1
   const canvas = document.createElement('canvas')
 
-  const ctx = canvas.getContext('2d')
+  const ctx: any = canvas.getContext('2d')
   const scaleX = image.naturalWidth / image.width
   const scaleY = image.naturalHeight / image.height
   canvas.width = crop.width * pixelRatio
@@ -43,7 +43,7 @@ function getCroppedImg(image: HTMLCanvasElement | HTMLImageElement | SVGImageEle
   })
 }
 
-export default function ReactCropImage(props) {
+export default function ReactCropImage(props: any) {
   const imgRef = useRef(null)
   const [crop, setCrop] = useState({
     x: 0,
@@ -85,7 +85,7 @@ export default function ReactCropImage(props) {
             {...props.cropProps}
             src={props.src}
             crop={crop}
-            onChange={(c => setCrop(c)}
+            onChange={c => setCrop(c)}
             onImageLoaded={onLoad}
             onComplete={(c: React.SetStateAction<null>) => setCompletedCrop(c)}
           />
